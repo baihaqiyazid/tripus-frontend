@@ -96,6 +96,7 @@ class _HomePageState extends State<HomePage> {
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: AppBar(
+            automaticallyImplyLeading: false,
             elevation: 0,
             backgroundColor: Colors.transparent,
             title: SvgPicture.asset('assets/logo.svg'),
@@ -113,22 +114,24 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      body: Container(
-        margin: EdgeInsets.only(left: 24, right: 24),
-        child: Column(
-          children: [
-            category(),
-            const SizedBox(height: 20,),
-            Expanded(
-              child: ListView(
-                children: [
-                  FeedsWidget(),
-                  FeedsWidget(),
-                ],
+      body: SafeArea(
+        child: Container(
+          margin: EdgeInsets.only(left: 24, right: 24),
+          child: Column(
+            children: [
+              category(),
+              const SizedBox(height: 20,),
+              Expanded(
+                child: ListView(
+                  children: [
+                    FeedsWidget(),
+                    FeedsWidget(),
+                  ],
+                ),
               ),
-            ),
 
-          ],
+            ],
+          ),
         ),
       ),
     );

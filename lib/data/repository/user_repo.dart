@@ -65,4 +65,25 @@ class UserRepositoryImpl extends UserRepository{
       throw Exception(firstError);
     }
   }
+
+  Future<UserModel> login(String email, password) async {
+    final response = await http.post(Uri.parse('$baseUrl/login'), body: {
+      "email": email,
+      "password": password,
+    });
+
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body)['data'];
+      UserModel user = UserModel.fromJson(data['user']);
+      user.token = data['token_type'] + " " + data['access_token'];
+      UserData.setToken(user.token);
+      await UserData.updateUser(user); // save data user yang sudah login ke shared preference
+      // print("UserData: ${UserData.user!.favorite![0].userId}");
+      return user;
+    } else {
+      Map<String, dynamic> responseData = jsonDecode(response.body);
+      throw Exception(responseData['data']['errors']);
+    }
+  }
+
 }

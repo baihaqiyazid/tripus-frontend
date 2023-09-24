@@ -3,8 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:tripusfrontend/bloc/user_bloc.dart';
 import 'package:tripusfrontend/data/repository/user_repo.dart';
+import 'package:tripusfrontend/pages/home/home_page.dart';
+import 'package:tripusfrontend/pages/login_page.dart';
 import 'package:tripusfrontend/pages/main_page.dart';
-import 'package:tripusfrontend/pages/register_page.dart';
+import 'package:tripusfrontend/pages/register/register_page.dart';
+import 'package:tripusfrontend/pages/splash_page.dart';
 import 'package:tripusfrontend/pages/splash_page.dart';
 import 'package:tripusfrontend/pages/verify_page.dart';
 
@@ -39,7 +42,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       builder: EasyLoading.init(),
       routes: {
-        '/': (context) => MainPage(),
+        '/': (context) =>SplashPage(),
+        '/home': (context) =>HomePage(),
+        '/login': (context) => BlocProvider<UserBloc>(
+          create: (context) => UserBloc(userRepository),
+          child: LoginPage(),
+        ),
         '/register': (context) => BlocProvider<UserBloc>(
               create: (context) => UserBloc(userRepository),
               child: RegisterPage(),

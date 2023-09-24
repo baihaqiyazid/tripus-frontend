@@ -10,6 +10,13 @@ class UserPostRegister extends UserEvent {
   UserPostRegister(this.name, this.email, this.password,);
 }
 
+class UserPostLogin extends UserEvent {
+  final String email;
+  final String password;
+
+  UserPostLogin( this.email, this.password,);
+}
+
 class UserVerifyEvent extends UserEvent {
   final String otpCode;
   UserVerifyEvent(this.otpCode);

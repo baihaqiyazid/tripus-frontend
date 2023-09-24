@@ -22,42 +22,16 @@ class LandingSignUp extends StatelessWidget {
                 ),),
               ),
               Center(
-                child: Positioned(
-                  top: 0,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(top: 590, bottom: 17),
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: ButtonStyle(
-                            padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                              EdgeInsets.symmetric(
-                                  vertical: 12, horizontal: 90), // Set the desired padding values
-                            ),
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius:
-                                BorderRadius.circular(17), // Set the desired border radius
-                              ),
-                            ),
-                            backgroundColor:
-                            MaterialStateProperty.all<Color>(backgroundColor),
-                          ),
-                          child: Text("Agent Open Trip", style: buttonSecondaryTextStyle.copyWith(
-                              fontSize: 22, fontWeight: FontWeight.w600
-                          ),),
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/register');
-                        },
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(top: 590, bottom: 17),
+                      child: ElevatedButton(
+                        onPressed: () {},
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
                             EdgeInsets.symmetric(
-                                vertical: 12, horizontal: 135), // Set the desired padding values
+                                vertical: 12, horizontal: 90), // Set the desired padding values
                           ),
                           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
@@ -68,12 +42,34 @@ class LandingSignUp extends StatelessWidget {
                           backgroundColor:
                           MaterialStateProperty.all<Color>(backgroundColor),
                         ),
-                        child: Text("Traveler", style: buttonSecondaryTextStyle.copyWith(
+                        child: Text("Agent Open Trip", style: buttonSecondaryTextStyle.copyWith(
                             fontSize: 22, fontWeight: FontWeight.w600
                         ),),
                       ),
-                    ],
-                  ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/register');
+                      },
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                          EdgeInsets.symmetric(
+                              vertical: 12, horizontal: 135), // Set the desired padding values
+                        ),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius:
+                            BorderRadius.circular(17), // Set the desired border radius
+                          ),
+                        ),
+                        backgroundColor:
+                        MaterialStateProperty.all<Color>(backgroundColor),
+                      ),
+                      child: Text("Traveler", style: buttonSecondaryTextStyle.copyWith(
+                          fontSize: 22, fontWeight: FontWeight.w600
+                      ),),
+                    ),
+                  ],
                 ),
               )
             ]

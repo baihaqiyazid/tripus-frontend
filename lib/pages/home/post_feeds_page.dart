@@ -22,6 +22,7 @@ class _PostFeedsPageState extends State<PostFeedsPage> {
     apiKey:
         'pk.eyJ1IjoiYmFpaGFxeSIsImEiOiJjbGpzODBuMDMwYmo0M2p2c2JneXE2MGlrIn0.xeSSV9yBJ-nTKgbh2JrOhQ',
     limit: 10,
+    country: 'ID',
   );
 
 
@@ -39,17 +40,6 @@ class _PostFeedsPageState extends State<PostFeedsPage> {
       setState(() {
         places = result!;
       });
-      // for (final place in places) {
-      //   print("place: ${place.text}");
-      //   print("coordinate: ${place.center}");
-      //   print("place Name: ${place.placeName}");
-      //   print("place adress Number: ${place.addressNumber}");
-      //   print("place geometry: ${place.geometry?.coordinates}");
-      //   print("place matching Name: ${place.matchingPlaceName}");
-      //   print("place matching text: ${place.matchingText}");
-      //   print("");
-      // }
-      // print("places: ${places}");
       return places;
     } catch (e) {
       // Handle error jika terjadi exception
@@ -213,7 +203,7 @@ class _PostFeedsPageState extends State<PostFeedsPage> {
             backgroundColor: Colors.transparent,
             title: Text("Post Photo"),
             titleTextStyle: TextStyle(
-                fontWeight: semibold, color: textPrimaryColor, fontSize: 15),
+                fontWeight: semibold, color: textPrimaryColor, fontSize: 16),
             centerTitle: true,
             iconTheme: IconThemeData(color: textPrimaryColor),
             actions: [
@@ -227,7 +217,7 @@ class _PostFeedsPageState extends State<PostFeedsPage> {
                 child: Text(
                   "Done",
                   style: buttonSecondaryTextStyle.copyWith(
-                      fontSize: 15, fontWeight: FontWeight.bold),
+                      fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
             ],

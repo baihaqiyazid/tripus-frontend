@@ -8,7 +8,8 @@ import 'package:tripusfrontend/helper/theme.dart';
 import 'package:tripusfrontend/helper/snackbar.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
-import '../helper/easy_loading.dart';
+import '../../helper/easy_loading.dart';
+import '../login_page.dart';
 
 // class RegisterPage extends StatefulWidget {
 //   RegisterPage({super.key});
@@ -16,6 +17,7 @@ import '../helper/easy_loading.dart';
 //   @override
 //   State<RegisterPage> createState() => _RegisterPageState();
 // }
+
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -59,7 +61,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
     Widget header() {
       return Container(
-        margin: EdgeInsets.only(top: 43),
+        margin: EdgeInsets.only(top: 50),
         child: Image.asset('assets/image_standing.png'),
       );
     }
@@ -185,17 +187,21 @@ class _RegisterPageState extends State<RegisterPage> {
     }
 
     Widget footer() {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text("You have an account?",
-              style: secondaryTextStyle.copyWith(fontSize: 14)),
-          TextButton(
-            onPressed: () {},
-            child: Text("Login",
-                style: buttonSecondaryTextStyle.copyWith(fontSize: 14)),
-          )
-        ],
+      return Container(
+        margin: EdgeInsets.only(bottom: 20),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("You have an account?",
+                style: secondaryTextStyle.copyWith(fontSize: 14)),
+            const SizedBox(width: 2,),
+            GestureDetector(
+              onTap: () => Navigator.pushNamed(context, '/login'),
+              child: Text("Login",
+                  style: buttonSecondaryTextStyle.copyWith(fontSize: 14)),
+            )
+          ],
+        ),
       );
     }
 
@@ -253,41 +259,42 @@ class _RegisterPageState extends State<RegisterPage> {
         child: SingleChildScrollView(
             reverse: true,
             child: SizedBox(
-                height: MediaQuery.of(context).size.height + 64,
-                child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 24),
-                    child: BlocConsumer<UserBloc, UserState>(
-                      listener: (context, state) {},
-                      builder: (context, state) {
-                        if (state is UserPostError) {
-                          _timer?.cancel();
-                          EasyLoading.instance
-                            ..loadingStyle = EasyLoadingStyle.custom
-                            ..backgroundColor = Colors.redAccent;
-                          EasyLoading.showError(state.code,
-                              maskType: EasyLoadingMaskType.black);
-                          EasyLoading.dismiss();
-                        } else if (state is UserPostLoading) {
-                          _timer?.cancel();
-                          EasyLoading.instance
-                            ..loadingStyle = EasyLoadingStyle.custom
-                            ..backgroundColor = Colors.black;
-                          EasyLoading.show(
-                            status: 'loading...',
-                          );
-                          print('EasyLoading show');
-                        } else if (state is UserPostSuccess) {
-                          hasNavigatedToVerify = true;
-                          BlocProvider.of<UserBloc>(context)
-                              .add(ResetStateEvent());
-                          SchedulerBinding.instance.addPostFrameCallback((_) {
-                            Navigator.pushNamed(context, '/verify').then((_) {
-                              hasNavigatedToVerify = false;
-                            });
+              height: MediaQuery.of(context).size.height,
+              child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 24),
+                  child: BlocConsumer<UserBloc, UserState>(
+                    listener: (context, state) {},
+                    builder: (context, state) {
+                      if (state is UserPostError) {
+                        _timer?.cancel();
+                        EasyLoading.instance
+                          ..loadingStyle = EasyLoadingStyle.custom
+                          ..backgroundColor = Colors.redAccent;
+                        EasyLoading.showError(state.code,
+                            maskType: EasyLoadingMaskType.black);
+                        EasyLoading.dismiss();
+                      } else if (state is UserPostLoading) {
+                        _timer?.cancel();
+                        EasyLoading.instance
+                          ..loadingStyle = EasyLoadingStyle.custom
+                          ..backgroundColor = Colors.black;
+                        EasyLoading.show(
+                          status: 'loading...',
+                        );
+                        print('EasyLoading show');
+                      } else if (state is UserPostSuccess) {
+                        hasNavigatedToVerify = true;
+                        BlocProvider.of<UserBloc>(context)
+                            .add(ResetStateEvent());
+                        SchedulerBinding.instance.addPostFrameCallback((_) {
+                          Navigator.pushNamed(context, '/verify').then((_) {
+                            hasNavigatedToVerify = false;
                           });
-                          EasyLoading.dismiss();
-                        }
-                        return Column(
+                        });
+                        EasyLoading.dismiss();
+                      }
+                      return SingleChildScrollView(
+                        child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -297,11 +304,14 @@ class _RegisterPageState extends State<RegisterPage> {
                             emailInput(),
                             passwordInput(),
                             buttonContinue(message),
+                            const SizedBox(height: 8,),
                             footer()
                           ],
-                        );
-                      },
-                    )))),
+                        ),
+                      );
+                    },
+                  )),
+            )),
       ),
     );
   }

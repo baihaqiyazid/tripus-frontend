@@ -1,7 +1,6 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../helper/theme.dart';
 import 'landing_signup.dart';
@@ -11,23 +10,26 @@ class LandingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        margin: EdgeInsets.only(top: 30),
-        child: Stack(
-          children: [
-            Image.asset(
-              'assets/background_landing.png', fit: BoxFit.cover, width:  double.infinity,
-            ),
-            Center(
-              child: Positioned(
+    return Scaffold(
+      body: Center(
+        child: Container(
+          margin: EdgeInsets.only(top: 30),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Image.asset(
+                'assets/background_landing.png', fit: BoxFit.cover, width:  double.infinity, height: MediaQuery.of(context).size.height,
+              ),
+              Positioned(
                 top: 0,
                 child: Column(
                   children: [
                     Container(
                       margin: EdgeInsets.only(top: 590, bottom: 17),
                       child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/login');
+                          },
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
                             EdgeInsets.symmetric(
@@ -71,9 +73,9 @@ class LandingPage extends StatelessWidget {
                     ),
                   ],
                 ),
-              ),
-            )
-          ]
+              )
+            ]
+          ),
         ),
       ),
     );
